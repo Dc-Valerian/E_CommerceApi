@@ -98,6 +98,7 @@
     "is-glob": "^4.0.3",
     "is-number": "^7.0.0",
     "isarray": "^1.0.0",
+    "joi": "^17.7.0",
     "jsonfile": "^4.0.0",
     "jsonwebtoken": "^9.0.0",
     "kareem": "^2.5.0",
