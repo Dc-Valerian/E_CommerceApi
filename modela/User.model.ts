@@ -20,7 +20,25 @@ const userSchema :Schema<UserSchema> = new Schema({
     },
     password:{
         type:String,
-        required:[true,"Please Enter the Right Password"],
+        required:[true,"Please enter your Password"],
         minlength:6
-    }
-})
+    },
+    confirmPassword:{
+          type:String,
+        required:[true,"Please Enter the Confirm Password"],
+        minlength:6
+    },
+    cart:[
+        {
+            items:{
+                products:Schema.Types.ObjectId,
+                ref:"Product"
+            },
+            quantity:Number
+        }
+    ]
+},{versionKey:false,timeStamps:true});
+
+const UserModel = model<UserSchema>("User",userSchema)
+
+export default UserModel;

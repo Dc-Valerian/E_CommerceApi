@@ -9,8 +9,7 @@ export interface IUser extends Document{
     cart:{
         items:{
             products:Schema.Types.ObjectId,
-            quantity:number
         },
-        amount:number
+            quantity:number
     }[]
 }
