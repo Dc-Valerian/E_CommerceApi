@@ -4,6 +4,7 @@ import { envVariable } from "./environment Variables"
 const DB = envVariable.DB_STRING;
 export async function dbConnection(){
     try {
+        mongoose.set("strictQuery",true)
         const conn = await mongoose.connect(DB)
         console.log(`Database is connected to ${conn.connection.host}`);
     } catch (error) {
