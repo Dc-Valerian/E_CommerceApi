@@ -1,11 +1,16 @@
 import express, { Application } from "express"
-import dotenv from "dotenv"
+import { envVariable } from "../config/environment Variables";
+import { appConfig } from "./app";
 
-dotenv.config()
 
-import {env} from "process"
+
+const port = envVariable.PORT
 
 
 const app:Application = express();
 
-app.listen()
+appConfig(app)
+
+app.listen(port,()=>{
+    console.log(`Listening to LocalHost PORT:${port}`);
+})
