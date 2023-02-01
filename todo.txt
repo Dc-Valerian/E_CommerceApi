@@ -1,0 +1,21 @@
+Build an e-commerce api 
+
+step 1:Authorization and Authentication
+
+~ endpoints:register and login 
+~ methods:Post
+~ Packages :bcrypt ,joi, express ,mongoose,validation ,dotenv, jsonweb
+
+step 2 : Post Products
+
+~ emdpoints :postproducts,update products,getall/ single products, delete product/products
+~ methods:post,patch,get,delete
+~ Packages: bcrypt ,joi, express ,mongoose,validation 
+
+step3: Order for a products/products
+
+~ endpoints:orderproducts /add to cart 
+
+step4:Api Features
+
+~ pagination ,filter,sort and search
