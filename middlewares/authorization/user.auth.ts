@@ -1,6 +1,8 @@
-import jwt,{JwtPayload,Secret} from "jsonwebtoken"
+import jwt,{JwtPayload,Secret, verify, VerifyErrors} from "jsonwebtoken"
 import {Request,Response,NextFunction} from "express"
 import { AppError, HttpCode } from "../../utils/App.Error";
+import UserModel from "../../models/User.model";
+import { IUser } from "../../interfaces/User";
 
 
  interface Payload extends JwtPayload{
@@ -28,6 +30,43 @@ export const userAuth =(req:Request,res:Response,next:NextFunction)=>{
         })
     )
    }
-   
+   const token:string = headers!.split(" ")[1]
+
+//    verify the token payload
+jwt.verify(
+    token,secret as Secret, async(err:VerifyErrors| null,decodedUser:any)=>{
+        if(err){
+            const errorMsg =
+            err.name === "JsonWebTokenError"? "Invalid token, you are not unauthorized":err.message;
+            next(
+                new AppError({
+                    httpCode:HttpCode.UNAUTHORIZED,
+                    message:errorMsg,
+                })
+            )
+        }
+        try {
+            const verifiedUser = await UserModel.findOne({_id:decodedUser!._id})
+            if(!verifiedUser){
+                next(
+                    new AppError({
+                        httpCode:HttpCode.UNAUTHORIZED,
+                        message:"Unauthorized User",
+                    })
+                )
+            }
+            req!.user = verifiedUser as IUser;
+            next();
+        } catch (error) {
+            next(
+                new AppError({
+                    httpCode:HttpCode.INTERNAL_SERVER_ERROR,
+                    message:error,
+                })
+            )
+        }
+    }
+)
+
 
 }
