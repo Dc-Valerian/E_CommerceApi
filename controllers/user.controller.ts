@@ -4,6 +4,7 @@ import {asyncHandler} from "../utils/asyncHandler"
 import {IUser} from "../interfaces/User"
 import userModel from "../models/User.model"
 import { AppError, HttpCode } from "../utils/App.Error"
+import jwt from "jsonwebtoken"
 
 // TO REGISTER
 export const Register = asyncHandler(
@@ -27,8 +28,9 @@ export const Register = asyncHandler(
             )
         }
 
+       
         return res.status(HttpCode.CREATED).json({
-            user
+       user
         })
     }
 )
@@ -67,8 +69,14 @@ export const Login = asyncHandler(
                 })
             )
         }
+         const payload ={
+            id:user!._id,
+            email:user!.email
+        }
+        const secret ="byvktuctxydufuvuy,dxkkyrysasdkrfghu.iyjraehsdrtfygiuhoijpoi,mncxbdgfcnghvhjbkjnnbwestrdyuioouytrstdtyfgiuoihopj.bzxfc"
+        jwt.sign(payload,secret as jwt.Secret,{expiresIn:"1h"})
         return res.status(HttpCode.OK).json({
-            user
+             message:`${user!.name},you are welcome`
         })
     }
 )

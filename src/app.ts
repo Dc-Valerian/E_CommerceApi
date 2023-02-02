@@ -7,7 +7,7 @@ import {errorHandler} from "../middlewares/error/errorHandler"
 import router from "../routes/user.router"
 
 export const appConfig=(app:Application)=>{
-    app.use(morgan("dev")).use(express.json()).use(cors())
+    app.use(morgan("dev")).use(express.json()).use(cors()).use('/api/auth',router)
 
     // CATCH WRONG ROUTES
     app.all("*",(req:Request,res:Response,next:NextFunction)=>{
