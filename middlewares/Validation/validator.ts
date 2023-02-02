@@ -16,7 +16,7 @@ export const validator = (schemaName:Joi.ObjectSchema,body:object,next:NextFunct
             })
         )
         :next();
-    } catch (error) {
+    } catch (error:any) {
         next(
             new AppError({
                  httpCode:HttpCode.BAD_REQUEST,

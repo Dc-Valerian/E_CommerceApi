@@ -6,10 +6,5 @@ export interface IUser extends Document{
     email:string;
     password:string;
     confirmPassword:string;
-    cart:{
-        items:{
-            products:Schema.Types.ObjectId,
-        },
-            quantity:number
-    }[]
+
 }

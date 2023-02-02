@@ -4,6 +4,7 @@ import cors from "cors"
 import { AppError, HttpCode } from "../utils/App.Error";
 // import { errorHandler } from "../middlewares/errorHandler";
 import {errorHandler} from "../middlewares/error/errorHandler"
+import router from "../routes/user.router"
 
 export const appConfig=(app:Application)=>{
     app.use(morgan("dev")).use(express.json()).use(cors())
@@ -19,6 +20,7 @@ export const appConfig=(app:Application)=>{
 
     })
 
+    .use("./api/user",router)
     // ERROR MIDDLEWARES
     app.use(errorHandler)
 }
