@@ -55,9 +55,9 @@ jwt.verify(
                     })
                 )
             }
-            req!.user = verifiedUser as IUser;
+            req.user = verifiedUser as IUser;
             next();
-        } catch (error) {
+        } catch (error:any) {
             next(
                 new AppError({
                     httpCode:HttpCode.INTERNAL_SERVER_ERROR,
