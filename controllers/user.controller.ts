@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import { Request,Response,NextFunction } from "express"
+import { Request,Response,NextFunction, request } from "express"
 import {asyncHandler} from "../utils/asyncHandler"
 import {IUser} from "../interfaces/User"
 import userModel from "../models/User.model"
@@ -76,6 +76,25 @@ export const Login = asyncHandler(
         return res.status(HttpCode.OK).json({
              message:`${user!.name},you are welcome`,
              token
+        })
+    }
+)
+
+// to get 
+export const getUser = asyncHandler(
+    async(req:Request,res:Response,next:NextFunction):Promise<Response>=>{
+        const user = await userModel.find()
+        if(!user){
+            next(
+                new AppError({
+                    message:"couldn't get user",
+                    httpCode:HttpCode.NOT_FOUND,
+                })
+            )
+        }
+        return res.status(HttpCode.NOT_FOUND).json({
+            message:"Successfully got the user",
+            user
         })
     }
 )
