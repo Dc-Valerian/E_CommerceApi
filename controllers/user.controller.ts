@@ -7,8 +7,9 @@ import { AppError, HttpCode } from "../utils/App.Error"
 
 
 export const Register = asyncHandler(
-    async(req:Request,res:Response,next:NextFunction):Promise<Response>=>{
-        const {name,email,password} = req.body;
+    async(req:Request<{},{},IUser>
+        ,res:Response,next:NextFunction):Promise<Response>=>{
+        const {name,email,password,confirmPassword} = req.body;
 
         const salt:string = await bcrypt.genSalt(10)
         const hashedPassword :string=await bcrypt.hash(password,salt);
