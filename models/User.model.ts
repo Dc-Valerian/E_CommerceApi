@@ -1,6 +1,7 @@
 import { Document,model,Schema } from "mongoose";
 import { IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail"
+import { authRole } from "../constants/user.constants";
 
 
 interface UserSchema extends Document,IUser{}
@@ -31,9 +32,9 @@ const userSchema :Schema<UserSchema> = new Schema({
     role:{
         type:String,
         required:true,
-        enum:["admin","user","manger"],
-        message:`Please identify your role as provided:admin,user,manager`,
-        default:"user",
+        enum:[authRole.admin,authRole.manager,authRole.user],
+        message:`Please identify your role as provided:${authRole.admin},${authRole.manager},${authRole.user}`,
+        default:authRole.user,
     }
   
 },{versionKey:false,timeStamps:true});

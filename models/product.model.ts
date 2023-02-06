@@ -1,5 +1,6 @@
 import { Document,model,Schema } from "mongoose";
 import { IProducts } from "../interfaces/Product";
+import { category } from "../constants/product.constants";
 
 interface ProductSchema extends Document,IProducts{}
 
@@ -17,9 +18,9 @@ const productSchema:Schema<ProductSchema> = new Schema({
         category:{
             type:String,
             required:true,
-            enum:["all","men's wear","women's wear","electronics","books","mobile phones"],
-            message:`Please enter category as supplied: all ,men's wears,women's wear,electronics,books,mobile phones`,
-            default:"all",
+            enum:[category.all,category.books,category.electronics,category.menswear,category.womenswear,category.mobilePhone],
+            message:`Please enter category as supplied: ${category.all},${category.books},${category.electronics},${category.menswear},${category.womenswear},${category.mobilePhone}`,
+            default:category.all,
         },
         rating:{
              type:Number,
