@@ -4,12 +4,14 @@ import cors from "cors"
 import { AppError, HttpCode } from "../utils/App.Error";
 // import { errorHandler } from "../middlewares/errorHandler";
 import {errorHandler} from "../middlewares/error/errorHandler"
-import router from "../routes/user.router"
+import userRouter from "../routes/user.router"
+import productRouter from "../routes/user.router"
 
 export const appConfig=(app:Application)=>{
-    app.use(morgan("dev")).use(express.json()).use(cors()).use('/api/auth',router)
+    app.use(morgan("dev")).use(express.json()).use(cors()).use('/api/auth',userRouter)
 
-        .use("/api/user",router)
+        .use("/api/user",userRouter)
+        .use("/api/product",productRouter)
     // CATCH WRONG ROUTES
     app.all("*",(req:Request,res:Response,next:NextFunction)=>{
         next(

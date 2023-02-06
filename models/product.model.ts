@@ -16,7 +16,10 @@ const productSchema:Schema<ProductSchema> = new Schema({
         },
         category:{
             type:String,
-            required:true
+            required:true,
+            enum:["all","men's wear","women's wear","electronics","books","mobile phones"],
+            message:`Please enter category as supplied: all ,men's wears,women's wear,electronics,books,mobile phones`,
+            default:"all",
         },
         rating:{
              type:Number,
