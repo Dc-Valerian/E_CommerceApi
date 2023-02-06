@@ -1,5 +1,5 @@
 import { Document,Schema } from "mongoose";
-
+import { Request } from "express";
 
 export interface IUser extends Document{
     name:string;
@@ -14,4 +14,7 @@ export interface IUser extends Document{
     //     }
     // }[];
     role:string;
+}
+export interface IAuthUser extends Request{
+    user:IUser
 }
