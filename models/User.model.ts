@@ -27,6 +27,13 @@ const userSchema :Schema<UserSchema> = new Schema({
           type:String,
         required:[true,"Please Enter the Confirm Password"],
         minlength:6
+    },
+    role:{
+        type:String,
+        required:true,
+        enum:["admin","user","manger"],
+        message:`Please identify your role as provided:admin,user,manager`,
+        default:"user",
     }
   
 },{versionKey:false,timeStamps:true});

@@ -6,12 +6,12 @@ export interface IUser extends Document{
     email:string;
     password:string;
     confirmPassword:string;
-    userId:Schema.Types.ObjectId;
-    cart?:{
-        items:{
-            productId:Schema.Types.ObjectId;
-            quantity:number
-        }
-    }[];
+    // userId:Schema.Types.ObjectId;
+    // cart?:{
+    //     items:{
+    //         productId:Schema.Types.ObjectId;
+    //         quantity:number
+    //     }
+    // }[];
     role:string;
 }
