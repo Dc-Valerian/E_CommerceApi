@@ -16,7 +16,7 @@ export const appConfig=(app:Application)=>{
     app.all("*",(req:Request,res:Response,next:NextFunction)=>{
         next(
             new AppError({
-                message:`This Route ${req.originalUrl} does not exists `,
+                message:`This Route ${req.originalUrl} doesn't exists `,
                 httpCode:HttpCode.NOT_FOUND
             })
         )

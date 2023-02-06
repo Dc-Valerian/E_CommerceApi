@@ -11,13 +11,13 @@ import {generateToken} from "../middlewares/authorization/user.auth"
 export const Register = asyncHandler(
     async(req:Request<{},{},IUser>
         ,res:Response,next:NextFunction):Promise<Response>=>{
-        const {name,email,password,confirmPassword} = req.body;
+        const {name,email,password,confirmPassword,role} = req.body;
 
         const salt:string = await bcrypt.genSalt(10)
         const hashedPassword :string=await bcrypt.hash(password,salt);
 
         const user = await userModel.create({
-            name,email,password:hashedPassword,confirmPassword :password,
+            name,email,password:hashedPassword,confirmPassword :password, role
         })
 
         if(!user){
