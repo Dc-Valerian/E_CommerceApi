@@ -84,7 +84,7 @@ export const Login = asyncHandler(
 export const getUser = asyncHandler(
     async(req:Request,res:Response,next:NextFunction):Promise<Response>=>{
         const user = await userModel.find()
-        if(!user){
+        if(!user){   
             next(
                 new AppError({
                     message:"couldn't get user",

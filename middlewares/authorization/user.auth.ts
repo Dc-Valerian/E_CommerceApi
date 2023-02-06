@@ -55,7 +55,8 @@ jwt.verify(
                     })
                 )
             }
-            req.user = verifiedUser as IUser;
+          
+            req!.user = verifiedUser as IUser;
             next();
         } catch (error:any) {
             next(
