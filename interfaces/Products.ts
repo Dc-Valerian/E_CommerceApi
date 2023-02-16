@@ -1,4 +1,5 @@
 import { Document, Schema } from "mongoose";
+import { IUser } from "./User";
 
 export interface ReviewT {
   user: Schema.Types.ObjectId;
@@ -15,4 +16,9 @@ export interface IProducts extends Document {
   productImage: string;
   numberOfReviews: number;
   reviews: ReviewT[];
+}
+
+
+export interface AddProducttoCart extends IUser{
+  productId:string;
 }
