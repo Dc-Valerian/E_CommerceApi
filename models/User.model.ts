@@ -3,7 +3,11 @@ import { IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail";
 import { authRole } from "../constants/user.constant";
 
-interface UserSchema extends Document, IUser {}
+interface UserSchema extends Document, IUser {
+  clearCart():Promise<void>;
+  removeFromCart(productId:string):Promise<void>
+  addToCart(prodID:string,doDecrease:boolean):Promise<boolean>
+}
 
 const userSchema: Schema<UserSchema> = new Schema(
   {
@@ -47,16 +51,22 @@ const userSchema: Schema<UserSchema> = new Schema(
   }
 );
 
+// WHEN WRITING AN OBJECT IT'S NOT ADVISABLE TO USED ARROW FUNCTION...
+userSchema.methods.addToCart = function(){}
+
+userSchema.methods.removeFromCart = function(){}
+
+userSchema.methods.clearCart =function(){}
 
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;
 
 // METHOD IS A FUNTION IN AN OBJECT
-const animal ={
-  sound:"Meow",
-  legs:4,
-  act:function(){
-    return `A cat has ${this.legs} legs, and sounds ${this.sound}`
-  }
-}
-console.log(animal.act());
+// const animal ={
+//   sound:"Meow",
+//   legs:4,
+//   act:function(){
+//     return `A cat has ${this.legs} legs, and sounds ${this.sound}`
+//   }
+// }
+// console.log(animal.act());
