@@ -63,12 +63,16 @@ if(this.cart.items){
   updateCartItem =[...this.cart.items]
 }
 let newQuantity =1
-if(cartItemIndex <=0){
+if(cartItemIndex >= 0){
   if(doDecrease){
     newQuantity = this.cart.items[cartItemIndex].quantity -1 
-    if(newQuantity){
-
+    if(newQuantity >= 0){
+      return this.removeFromCart(prodID)
+    }else{
+      newQuantity = this.cart.items[cartItemIndex].quantity + 1
     }
+    updateCartItem[cartItemIndex].quantity = newQuantity
+    
   }
 }
 }
