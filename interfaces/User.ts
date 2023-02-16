@@ -1,6 +1,11 @@
 import { Document, Schema } from "mongoose";
 import { Request } from "express";
 
+export interface ICartItems{
+  productId:string;
+  quantity:number;
+}
+
 export interface IUser extends Document {
   name: string;
   email: string;

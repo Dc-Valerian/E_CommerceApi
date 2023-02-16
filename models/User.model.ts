@@ -54,9 +54,13 @@ const userSchema: Schema<UserSchema> = new Schema(
 // WHEN WRITING AN OBJECT IT'S NOT ADVISABLE TO USED ARROW FUNCTION...
 userSchema.methods.addToCart = function(){}
 
-userSchema.methods.removeFromCart = function(){}
+userSchema.methods.removeFromCart = function(){
+  
+}
 
-userSchema.methods.clearCart =function(){}
+userSchema.methods.clearCart =function(){
+  this.cart ={items:[]}
+}
 
 const UserModel = model<UserSchema>("User", userSchema);
 export default UserModel;
