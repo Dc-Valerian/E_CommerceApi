@@ -1,15 +1,9 @@
-import { NextFunction, RequestHandler,Request,Response } from "express";
+import { RequestHandler } from "express";
+import { validator } from "./../validator";
 import { userSchemaValidator } from "./userSchema";
-import {validator} from "../validator";
 
-export const RegisterValidation :RequestHandler=(
-    req:Request,res:Response,next:NextFunction
-)=>{
-    validator(userSchemaValidator.register,req.body,next)
-};
+export const registerValidation: RequestHandler = (req, res, next) =>
+  validator(userSchemaValidator.register, req.body, next);
 
-export const LoginValidation:RequestHandler=(
-    req:Request,res:Response,next:NextFunction
-)=>{
-    validator(userSchemaValidator.login,req.body,next)
-}
+export const loginValidation: RequestHandler = (req, res, next) =>
+  validator(userSchemaValidator.login, req.body, next);

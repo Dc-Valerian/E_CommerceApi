@@ -4,8 +4,8 @@ import cors from "cors"
 import { AppError, HttpCode } from "../utils/App.Error";
 // import { errorHandler } from "../middlewares/errorHandler";
 import {errorHandler} from "../middlewares/error/errorHandler"
-import userRouter from "../routes/user.router"
-import productRouter from "../routes/user.router"
+import userRouter from "../routes/user.route"
+import productRouter from "../routes/product.route"
 
 export const appConfig=(app:Application)=>{
     app.use(morgan("dev")).use(express.json()).use(cors()).use('/api/auth',userRouter)
