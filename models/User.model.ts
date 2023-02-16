@@ -54,12 +54,17 @@ const userSchema: Schema<UserSchema> = new Schema(
 // WHEN WRITING AN OBJECT IT'S NOT ADVISABLE TO USED ARROW FUNCTION...
 userSchema.methods.addToCart = function(){}
 
-userSchema.methods.removeFromCart = function(){
-  
+userSchema.methods.removeFromCart = function(productId:string){
+ const updateCart =   this.cart.items.filter((item:{productId:{toString:()=>string}})=>{
+  return item.productId.toString() !== productId.toString()
+     })
+     this.cart.items = updateCart
+     return this.save({validateBeforeSave:false})
 }
 
 userSchema.methods.clearCart =function(){
   this.cart ={items:[]}
+  return this.save()
 }
 
 const UserModel = model<UserSchema>("User", userSchema);
