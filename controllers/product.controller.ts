@@ -51,3 +51,5 @@ export const getAllProduct = asyncHandler(
     });
   }
 );
+
+export const addToCart

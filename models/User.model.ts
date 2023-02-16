@@ -72,9 +72,18 @@ if(cartItemIndex >= 0){
       newQuantity = this.cart.items[cartItemIndex].quantity + 1
     }
     updateCartItem[cartItemIndex].quantity = newQuantity
-    
   }
+}else{
+  updateCartItem.push({
+    productId:prodID,
+    quantity:newQuantity
+  })
 }
+const updateCart ={
+  items:updateCartItem
+}
+this.cart.items = updateCart;
+return this.save({validateBeforeSave:false})
 }
 
 userSchema.methods.removeFromCart = function(productId:string){
