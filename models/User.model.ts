@@ -1,5 +1,5 @@
 import { Document, model, Schema } from "mongoose";
-import { IUser } from "../interfaces/User";
+import { ICartItems, IUser } from "../interfaces/User";
 import isEmail from "validator/lib/isEmail";
 import { authRole } from "../constants/user.constant";
 
@@ -52,7 +52,26 @@ const userSchema: Schema<UserSchema> = new Schema(
 );
 
 // WHEN WRITING AN OBJECT IT'S NOT ADVISABLE TO USED ARROW FUNCTION...
-userSchema.methods.addToCart = function(){}
+userSchema.methods.addToCart = function(prodID:string,doDecrease:boolean){
+  let cartItemIndex = -1;
+  let updateCartItem: ICartItems[]=[]
+
+if(this.cart.items){
+  cartItemIndex = this.cart.items.findIndex((cp:{productId:{toString:()=>string}})=>{
+    return cp.productId.toString() === prodID.toString()
+  })
+  updateCartItem =[...this.cart.items]
+}
+let newQuantity =1
+if(cartItemIndex <=0){
+  if(doDecrease){
+    newQuantity = this.cart.items[cartItemIndex].quantity -1 
+    if(newQuantity){
+
+    }
+  }
+}
+}
 
 userSchema.methods.removeFromCart = function(productId:string){
  const updateCart =   this.cart.items.filter((item:{productId:{toString:()=>string}})=>{
