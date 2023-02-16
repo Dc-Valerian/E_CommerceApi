@@ -3,6 +3,9 @@ import ProductModel from "../models/products.model";
 import { IProducts } from "../interfaces/Products";
 import { AppError, HttpCode } from "../utils/App.Error";
 import { asyncHandler } from "../utils/asyncHandler";
+import { AuthenticatedBody } from "../interfaces/Custom.interface";
+import { IUser } from "../interfaces/User";
+import UserModel from "../models/user.model";
 
 export const createProduct = asyncHandler(
   async (
@@ -52,4 +55,21 @@ export const getAllProduct = asyncHandler(
   }
 );
 
-export const addToCart
+export const addToCart = asyncHandler(
+  async(req:AuthenticatedBody<IUser>,res:Response,next:NextFunction):Promise<Response>=>{
+    
+    // const product = await ProductModel.findById(req!.body!._id)
+
+    const user = await UserModel.findOne({email:req!.user!.email})
+    if(!user){
+      next(
+        new AppError({
+          message:"User not Found",
+          httpCode:HttpCode.NOT_FOUND,
+        })
+      )
+      // const updatedUser = await
+    }
+
+  }
+)
